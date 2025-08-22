@@ -1,0 +1,1583 @@
+# vi: ft=dosini
+[main]
+
+# Enables context sensitive auto-completion. If this is disabled, all
+# possible completions will be listed.
+smart_completion = True
+
+# Display the completions in several columns. (More completions will be
+# visible.)
+wider_completion_menu = False
+
+# Do not create new connections for refreshing completions; Equivalent to
+# always running with the --single-connection flag.
+always_use_single_connection = False
+
+# Multi-line mode allows breaking up the sql statements into multiple lines. If
+# this is set to True, then the end of the statements must have a semi-colon.
+# If this is set to False then sql statements can't be split into multiple
+# lines. End of line (return) is considered as the end of the statement.
+multi_line = False
+
+# If multi_line_mode is set to "psql", in multi-line mode, [Enter] will execute
+# the current input if the input ends in a semicolon.
+# If multi_line_mode is set to "safe", in multi-line mode, [Enter] will always
+# insert a newline, and [Esc] [Enter] or [Alt]-[Enter] must be used to execute
+# a command.
+multi_line_mode = psql
+
+# Destructive warning will alert you before executing a sql statement
+# that may cause harm to the database such as "drop table", "drop database",
+# "shutdown", "delete", or "update".
+# You can pass a list of destructive commands or leave it empty if you want to skip all warnings.
+# "unconditional_update" will warn you of update statements that don't have a where clause
+destructive_warning = drop, shutdown, delete, truncate, alter, update, unconditional_update
+
+# When `destructive_warning` is on and the user declines to proceed with a
+# destructive statement, the current transaction (if any) is left untouched,
+# by default. When setting `destructive_warning_restarts_connection` to
+# "True", the connection to the server is restarted. In that case, the
+# transaction (if any) is rolled back.
+destructive_warning_restarts_connection = False
+
+# When this option is on (and if `destructive_warning` is not empty),
+# destructive statements are not executed when outside of a transaction.
+destructive_statements_require_transaction = False
+
+# Enables expand mode, which is similar to `\x` in psql.
+expand = False
+
+# Enables auto expand mode, which is similar to `\x auto` in psql.
+auto_expand = False
+
+# Auto-retry queries on connection failures and other operational errors. If
+# False, will prompt to rerun the failed query instead of auto-retrying.
+auto_retry_closed_connection = True
+
+# If set to True, table suggestions will include a table alias
+generate_aliases = False
+
+# Path to a json file that specifies specific table aliases to use when generate_aliases is set to True
+# the format for this file should be:
+# {
+#     "some_table_name": "desired_alias",
+#     "some_other_table_name": "another_alias"
+# }
+alias_map_file = ""
+
+# log_file location.
+# In Unix/Linux: ~/.config/pgcli/log
+# In Windows: %USERPROFILE%\AppData\Local\dbcli\pgcli\log
+# %USERPROFILE% is typically C:\Users\{username}
+log_file = default
+
+# keyword casing preference. Possible values: "lower", "upper", "auto"
+keyword_casing = auto
+
+# casing_file location.
+# In Unix/Linux: ~/.config/pgcli/casing
+# In Windows: %USERPROFILE%\AppData\Local\dbcli\pgcli\casing
+# %USERPROFILE% is typically C:\Users\{username}
+casing_file = default
+
+# If generate_casing_file is set to True and there is no file in the above
+# location, one will be generated based on usage in SQL/PLPGSQL functions.
+generate_casing_file = False
+
+# Casing of column headers based on the casing_file described above
+case_column_headers = True
+
+# history_file location.
+# In Unix/Linux: ~/.config/pgcli/history
+# In Windows: %USERPROFILE%\AppData\Local\dbcli\pgcli\history
+# %USERPROFILE% is typically C:\Users\{username}
+history_file = default
+
+# Default log level. Possible values: "CRITICAL", "ERROR", "WARNING", "INFO"
+# and "DEBUG". "NONE" disables logging.
+log_level = INFO
+
+# Order of columns when expanding * to column list
+# Possible values: "table_order" and "alphabetic"
+asterisk_column_order = table_order
+
+# Whether to qualify with table alias/name when suggesting columns
+# Possible values: "always", "never" and "if_more_than_one_table"
+qualify_columns = if_more_than_one_table
+
+# When no schema is entered, only suggest objects in search_path
+search_path_filter = False
+
+# Default pager. See https://www.pgcli.com/pager for more information on settings.
+# By default 'PAGER' environment variable is used. If the pager is less, and the 'LESS'
+# environment variable is not set, then LESS='-SRXF' will be automatically set.
+# pager = -XFR
+
+# Timing of sql statements and table rendering.
+timing = True
+
+# Show/hide the informational toolbar with function keymap at the footer.
+show_bottom_toolbar = True
+
+# Table format. Possible values: psql, plain, simple, grid, fancy_grid, pipe,
+# ascii, double, github, orgtbl, rst, mediawiki, html, latex, latex_booktabs,
+# textile, moinmoin, jira, vertical, tsv, csv, sql-insert, sql-update,
+# sql-update-1, sql-update-2 (formatter with sql-* prefix can format query
+# output to executable insertion or updating sql).
+# Recommended: psql, fancy_grid and grid.
+table_format = double
+
+# Syntax Style. Possible values: manni, igor, xcode, vim, autumn, vs, rrt,
+# native, perldoc, borland, tango, emacs, friendly, monokai, paraiso-dark,
+# colorful, murphy, bw, pastie, paraiso-light, trac, default, fruity
+syntax_style = monokai
+
+# Keybindings:
+# When Vi mode is enabled you can use modal editing features offered by Vi in the REPL.
+# When Vi mode is disabled emacs keybindings such as Ctrl-A for home and Ctrl-E
+# for end are available in the REPL.
+vi = False
+
+# Error handling
+# When one of multiple SQL statements causes an error, choose to either
+# continue executing the remaining statements, or stopping
+# Possible values "STOP" or "RESUME"
+on_error = STOP
+
+# Set threshold for row limit. Use 0 to disable limiting.
+row_limit = 1000
+
+# Truncate long text fields to this value for tabular display (does not apply to csv).
+# Leave unset to disable truncation. Example: "max_field_width = "
+# Be aware that formatting might get slow with values larger than 500 and tables with
+# lots of records.
+max_field_width = ""
+
+# Skip intro on startup and goodbye on exit
+less_chatty = False
+
+# Show all Postgres error fields (as listed in
+# https://www.postgresql.org/docs/current/protocol-error-fields.html).
+# Can be toggled with \v.
+verbose_errors = False
+
+# Postgres prompt
+# \t - Current date and time
+# \u - Username
+# \h - Short hostname of the server (up to first '.')
+# \H - Hostname of the server
+# \d - Database name
+# \p - Database port
+# \i - Postgres PID
+# \# - "@" sign if logged in as superuser, '>' in other case
+# \n - Newline
+# \dsn_alias - name of dsn connection string alias if -D option is used (empty otherwise)
+# \x1b[...m - insert ANSI escape sequence
+# eg: prompt = '\x1b[35m\u@\x1b[32m\h:\x1b[36m\d>'
+#prompt = "\u@\h:\d> "
+prompt = "\x1b[33m\u@\x1b[35m\h:\x1b[32m\d> "
+
+# Number of lines to reserve for the suggestion menu
+min_num_menu_lines = 4
+
+# Character used to left pad multi-line queries to match the prompt size.
+multiline_continuation_char = ""
+
+# The string used in place of a null value.
+null_string = null
+
+# manage pager on startup
+enable_pager = True
+
+# Use keyring to automatically save and load password in a secure manner
+keyring = True
+
+# Custom colors for the completion menu, toolbar, etc.
+[colors]
+completion-menu.completion.current = "bg:#ffffff #000000"
+completion-menu.completion = "bg:#008888 #ffffff"
+completion-menu.meta.completion.current = "bg:#44aaaa #000000"
+completion-menu.meta.completion = "bg:#448888 #ffffff"
+completion-menu.multi-column-meta = "bg:#aaffff #000000"
+scrollbar.arrow = "bg:#003333"
+scrollbar = "bg:#00aaaa"
+selected = "#ffffff bg:#6666aa"
+search = "#ffffff bg:#4444aa"
+search.current = "#ffffff bg:#44aa44"
+bottom-toolbar = "bg:#222222 #aaaaaa"
+bottom-toolbar.off = "bg:#222222 #888888"
+bottom-toolbar.on = "bg:#222222 #ffffff"
+search-toolbar = noinherit bold
+search-toolbar.text = nobold
+system-toolbar = noinherit bold
+arg-toolbar = noinherit bold
+arg-toolbar.text = nobold
+bottom-toolbar.transaction.valid = "bg:#222222 #00ff5f bold"
+bottom-toolbar.transaction.failed = "bg:#222222 #ff005f bold"
+# These three values can be used to further refine the syntax highlighting.
+# They are commented out by default, since they have priority over the theme set
+# with the `syntax_style` setting and overriding its behavior can be confusing.
+# literal.string = '#ba2121'
+# literal.number = '#666666'
+# keyword = 'bold #008000'
+
+# style classes for colored table output
+output.header = "#00ff5f bold"
+output.odd-row = ""
+output.even-row = ""
+output.null = "#808080"
+
+# Named queries are queries you can execute by name.
+[named queries]
+dds = "SELECT n.nspname  AS schemaname, c.relname  AS tablename, to_char(c.reltuples, 'FM999,999,999,999') AS row_count_estimate, to_char(COALESCE(s.n_dead_tup, 0), 'FM999,999,999,999') AS dead_tuple_count, pg_size_pretty(pg_indexes_size(c.oid)) AS index_size, pg_size_pretty(pg_total_relation_size(c.oid)) AS total_size FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace LEFT JOIN pg_stat_all_tables s ON s.relid = c.oid WHERE c.relkind IN ('r','p') AND n.nspname NOT IN ('pg_catalog', 'information_schema', 'hint_plan', 'partman') ORDER BY pg_total_relation_size(c.oid) DESC"
+ps = "SELECT pid, datname AS database_name, usename AS user_name, state, query, query_start, backend_start, client_addr, application_name FROM pg_stat_activity WHERE state <> 'idle' ORDER BY query_start DESC"
+psf = "SELECT pid, datname AS database_name, usename AS user_name, state, query, query_start, backend_start, client_addr, application_name FROM pg_stat_activity ORDER BY query_start DESC"
+gv = "SELECT name, setting FROM pg_settings WHERE name LIKE '%$1%'"
+role_inherit = '''WITH RECURSIVE cte AS (
+SELECT oid ,oid as member_of,1 as d,''::name as path FROM pg_roles r where r.rolname !~ '^pg_'
+UNION
+SELECT m.roleid,m.member as member_of ,d+1,path||'->'||pg_get_userbyid(cte.oid) as path
+FROM cte
+JOIN pg_auth_members m ON m.member = cte.oid where d<15
+)
+SELECT distinct pg_get_userbyid(member_of)::varchar as username, pg_get_userbyid(oid)::varchar as parent_role ,d::int as depth, substr(path::text||'->'||pg_get_userbyid(oid),3) as path FROM cte where d > 1 ORDER BY depth'''
+user_role = '''SELECT a.rolname
+FROM pg_roles a JOIN pg_auth_members b ON a.oid = b.roleid
+JOIN pg_roles c ON b.member = c.oid
+WHERE c.rolname = '$1''''
+index_ratio = '''select max(relname), max(indexrelname),
+sum(idx_blks_read) as idx_read,
+sum(idx_blks_hit)  as idx_hit,
+concat(TRUNC((sum(idx_blks_hit) - sum(idx_blks_read)) / sum(idx_blks_hit)*100, 1), '%') as ratio
+from pg_statio_user_indexes
+where idx_blks_read != 0
+  and idx_blks_hit != 0
+group by indexrelid
+order by max(relname), ratio'''
+pf_topquery = '''SELECT ROUND((100*total_exec_time/SUM(total_exec_time) OVER ())::numeric, 2) AS percent,
+ROUND(total_exec_time::numeric, 2) AS total_exec_time,
+to_char(calls, 'FM999,999,999,999,999') AS calls,
+ROUND(mean_exec_time::numeric, 2) AS mean_exec_time,
+substring(query, 1, 1000) AS query
+FROM pg_stat_statements ORDER BY total_exec_time DESC, mean_exec_time DESC, calls DESC LIMIT $1'''
+pf_seqscan = '''SELECT schemaname, relname, seq_scan, seq_tup_read,
+       idx_scan, seq_tup_read / seq_scan AS avg,
+       last_seq_scan
+  FROM pg_stat_user_tables
+ WHERE seq_scan > 0
+ ORDER BY seq_tup_read DESC'''
+pf_indexratio = '''SELECT max(relname), max(indexrelname),
+sum(idx_blks_read) AS idx_read,
+sum(idx_blks_hit)  AS idx_hit,
+concat(TRUNC((sum(idx_blks_hit) - sum(idx_blks_read)) / sum(idx_blks_hit)*100, 1), '%') AS ratio
+FROM pg_statio_user_indexes
+WHERE idx_blks_read != 0
+  AND idx_blks_hit != 0
+GROUP BY indexrelid
+ORDER BY max(relname), ratio'''
+op_killquery = "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE usename = '$1'"
+pf_dbsession = '''SELECT datname,
+count(*) AS open,
+count(*) FILTER (WHERE state = 'active') AS active,
+count(*) FILTER (WHERE state = 'idle') AS idle,
+count(*) FILTER (WHERE state = 'idle_in_transaction') AS idle_in_trans
+FROM pg_stat_activity
+WHERE backend_type = 'client backend'
+GROUP BY ROLLUP(1)'''
+pf_cardinality = '''SELECT tablename,
+       attname AS column_name,
+       null_frac,
+       avg_width,
+       n_distinct,
+       array_to_string(most_common_vals, E'\n') AS mcv,
+       array_to_string(most_common_freqs, E'\n') AS mcf
+FROM  pg_stats
+WHERE tablename = '$1''''
+pf_indexprogress = '''SELECT pid,
+       datname,
+       relid::regclass AS table,
+       index_relid::regclass AS index,
+       phase,
+       lockers_total,
+       lockers_done,
+       current_locker_pid,
+       blocks_total,
+       blocks_done,
+       tuples_total,
+       tuples_done
+FROM pg_stat_progress_create_index'''
+pf_commitratio = '''SELECT
+  datname, 100 * xact_commit / (xact_commit + xact_rollback) as commit_ratio
+FROM pg_stat_database WHERE (xact_commit + xact_rollback) > 0'''
+SELECT = '''max(state), max(query),
+     split_part(client_addr::text, '.', 1) || '.' ||
+     split_part(client_addr::text, '.', 2) || '.' ||
+     split_part(client_addr::text, '.', 3) || '.' || split_part(client_addr::text, '.', 4) AS client_subnet,
+     count(*) AS session_count
+ FROM
+     pg_stat_activity
+ WHERE
+     client_addr IS NOT NULL
+ GROUP BY
+     client_subnet
+ ORDER BY
+     client_subnet pf_clientip'''
+pf_clientip = '''SELECT max(state), now() - max(query_start) AS duration, max(usename) AS user_name,
+        SPLIT_PART(client_addr::text, '.', 1) || '.' ||
+        SPLIT_PART(client_addr::text, '.', 2) || '.' ||
+        SPLIT_PART(client_addr::text, '.', 3) || '.' || SPLIT_PART(client_addr::text, '.', 4) AS client_subnet,
+        MAX(CASE SPLIT_PART(client_addr::text, '.', 1) || SPLIT_PART(client_addr::text, '.', 2) WHEN '100' THEN 'security vpc'
+                                                                                            WHEN '102' THEN 'prod'
+                                                                                            WHEN '108' THEN 'stage'
+                                                                                            WHEN '106' THEN 'dev'
+                                                                                            WHEN '1010' THEN 'data-prod'
+                                                                                            WHEN '1014' THEN 'data-dev'
+                                                                                            WHEN '104' THEN 'beta'
+                                                                                            END) AS env,
+        count(*) AS session_count
+    FROM
+        pg_stat_activity
+    WHERE
+        client_addr IS NOT NULL
+    GROUP BY
+        client_subnet
+    ORDER BY
+        client_subnet'''
+pf_clientip_query = '''SELECT MAX(state), NOW() - MAX(query_start) AS duration, MAX(usename) AS user_name,
+        SPLIT_PART(client_addr::text, '.', 1) || '.' ||
+        SPLIT_PART(client_addr::text, '.', 2) || '.' ||
+        SPLIT_PART(client_addr::text, '.', 3) || '.' || SPLIT_PART(client_addr::text, '.', 4) AS client_subnet,
+        MAX(CASE SPLIT_PART(client_addr::text, '.', 1) || SPLIT_PART(client_addr::text, '.', 2) WHEN '100' THEN 'security vpc'
+                                                                                            WHEN '102' THEN 'prod'
+                                                                                            WHEN '108' THEN 'stage'
+                                                                                            WHEN '106' THEN 'dev'
+                                                                                            WHEN '1010' THEN 'data-prod'
+                                                                                            WHEN '1014' THEN 'data-dev'
+                                                                                            WHEN '104' THEN 'beta'
+                                                                                            END) AS env,
+        count(*) AS session_count, query
+    FROM
+        pg_stat_activity
+    WHERE
+        client_addr IS NOT NULL
+    GROUP BY
+        client_subnet, query
+    ORDER BY
+        client_subnet'''
+pf_indexsize = '''SELECT i.relname "Table Name",indexrelname "Index Name",
+ pg_size_pretty(pg_total_relation_size(relid)) As "Total Size",
+ pg_size_pretty(pg_indexes_size(relid)) as "Total Size of all Indexes",
+ pg_size_pretty(pg_relation_size(relid)) as "Table Size",
+ pg_size_pretty(pg_relation_size(indexrelid)) "Index Size",
+ reltuples::bigint "Estimated table row count"
+ FROM pg_stat_all_indexes i JOIN pg_class c ON i.relid=c.oid
+ WHERE i.relname='$1''''
+pf_stats = '''SELECT tablename,
+       attname AS column_name,
+       null_frac,
+       avg_width,
+       n_distinct,
+       array_to_string(most_common_vals, E'\n') AS mcv,
+       array_to_string(most_common_freqs, E'\n') AS mcf,
+       array_to_string(histogram_bounds, E'\n') as hist
+FROM  pg_stats
+WHERE tablename = '$1''''
+help = '''SELECT 'dds' AS command,                'Retrieves user table statistics: row count, dead tuple count, index size, and total size, ordered by total size (excluding system schemas).' AS description
+UNION ALL
+SELECT 'ps' AS command,                 'Lists currently active PostgreSQL sessions and queries with details such as user, database, query start time, client address, ordered by query start time (descending).' AS description
+UNION ALL
+SELECT 'pss' AS command,                 'Aggregates query performance stats from pg_stat_statements, showing execution times, planning times, I/O metrics, and query IDs per user, database, and query. Lists the top 50 queries by total execution time.' AS description
+UNION ALL
+SELECT 'psf' AS command,                'Lists all PostgreSQL sessions (including idle) with query details, ordered by query start time (descending).' AS description
+UNION ALL
+SELECT 'gv' AS command,                 'Searches PostgreSQL settings (`pg_settings`) for configuration parameters matching a specific keyword.' AS description
+UNION ALL
+SELECT 'role_inherit' AS command,       'Displays role inheritance hierarchy using a recursive query, showing each role, its parent roles, and inheritance depth.' AS description
+UNION ALL
+SELECT 'user_role' AS command,          'Retrieves roles granted to a specific user or role.' AS description
+UNION ALL
+SELECT 'index_ratio' AS command,        'Calculates index cache hit ratio for each index by comparing blocks read and hit, ordered by table and ratio.' AS description
+UNION ALL
+SELECT 'pf_report' AS command,          'Generates a detailed performance report from pg_stat_statements, grouping and normalizing queries across databases.' AS description
+UNION ALL
+SELECT 'pf_topquery' AS command,        'Shows top SQL queries by total execution time from `pg_stat_statements`, including execution percentage, total time, mean time, and call count.' AS description
+UNION ALL
+SELECT 'pf_seqscan' AS command,         'Reports sequential scan statistics per user table: number of scans, rows read, index scans, and average rows per scan.' AS description
+UNION ALL
+SELECT 'pf_indexratio' AS command,      'Similar to `index_ratio`; reports index cache hit ratio for each index, grouped and ordered by table and ratio.' AS description
+UNION ALL
+SELECT 'op_killquery' AS command,       'Terminates running queries by user name using `pg_terminate_backend()`.' AS description
+UNION ALL
+SELECT 'pf_dbsession' AS command,       'Summarizes database sessions per database: total connections, active, idle, and idle in transaction counts.' AS description
+UNION ALL
+SELECT 'pf_useindex' AS command,        'Lists indexes that have never been used (zero index scans) from `pg_stat_user_indexes`.' AS description
+UNION ALL
+SELECT 'pf_cardinality' AS command,     'Retrieves column statistics for a specific table: null fraction, average width, distinct values, most common values, and their frequencies.' AS description
+UNION ALL
+SELECT 'pf_indexprogress' AS command,   'Shows progress of index creation operations, including total and completed blocks, tuples, and current phase.' AS description
+UNION ALL
+SELECT 'pf_commitratio' AS command,     'Calculates commit ratio per database (committed transactions vs total transactions) from `pg_stat_database`.' AS descriptio
+UNION ALL
+SELECT 'pf_clientip' AS command,        'Summarizes session count per client subnet, including environment label (e.g., prod, dev) based on subnet prefix.' AS description
+UNION ALL
+SELECT 'pf_clientip_query' AS command,  'Similar to `pf_clientip`, but also includes the query text being executed by client subnet.' AS description
+UNION ALL
+SELECT 'pf_indexsize' AS command,       'Reports index and table sizes for a specific table, including total size, index size, and estimated row count.' AS description
+UNION ALL
+SELECT 'pf_stats' AS command,           'Retrieves extended statistics for a specific table column: null fraction, width, distinct count, most common values and frequencies, and histogram bounds.' AS description
+UNION ALL
+SELECT 'pss' AS command,                 'Shows top 50 slowest queries from `pg_stat_statements`, summarizing execution, planning, and I/O statistics per query.' AS description
+UNION ALL
+SELECT 'btree_estimation' AS command,    'Estimates bloat and storage overhead for B-tree indexes by comparing actual and expected index sizes.' AS description
+UNION ALL
+SELECT 'pf_index_migration' AS command,  'Generates SQL scripts to drop unused or redundant indexes and recreate them, aiding index cleanup and migration.' AS description
+UNION ALL
+SELECT 'pf_index_duplicate' AS command,  'Detects duplicate/redundant indexes by comparing index definitions, columns, and properties on the same table.' AS description
+UNION ALL
+SELECT 'pf_index_usage' AS command,      'Reports unused or inefficient indexes based on scan counts, write activity, and size, helping identify index optimization candidates.' AS description
+UNION ALL
+SELECT 'pf_lock_tree' AS command,        'Displays PostgreSQL lock wait chains as a lock tree, identifying blocked and blocking sessions for lock troubleshooting.' AS description
+UNION ALL
+SELECT 'aurora_plan_top10' AS command,   'Shows the top 10 most frequently called estimate plans with their average execution time.' AS description
+UNION ALL
+SELECT 'aurora_plan_id' AS command,       'Fetches full details (type, time, plan, SQL) for a specific planid.' AS description
+UNION ALL
+SELECT 'aurora_plan_now' AS command,     'Lists currently running queries with their state, start time, SQL, and execution plan.' AS description'''
+pss = '''select
+  sum(calls) as calls,
+  round(sum(total_exec_time)::numeric, 2) as total_exec_t,
+  round((sum(mean_exec_time * calls) / sum(calls))::numeric, 2) as mean_exec_t,
+  format(
+    '%s–%s',
+    round(min(min_exec_time)::numeric, 2),
+    round(max(max_exec_time)::numeric, 2)
+  ) as min_max_exec_t,
+  round(sum(total_plan_time)::numeric, 2) as total_plan_t,
+  round((sum(mean_plan_time * calls) / sum(calls))::numeric, 2) as mean_plan_t,
+  format(
+    '%s–%s',
+    round(min(min_plan_time)::numeric, 2),
+    round(max(max_plan_time)::numeric, 2)
+  ) as min_max_plan_t,
+  sum(rows) as rows,
+  (select usename from pg_user where usesysid = userid) as usr,
+  (select datname from pg_database where oid = dbid) as db,
+  query,
+  sum(shared_blks_hit) as shared_blks_hit,
+  sum(shared_blks_read) as shared_blks_read,
+  sum(shared_blks_dirtied) as shared_blks_dirtied,
+  sum(shared_blks_written) as shared_blks_written,
+  sum(local_blks_hit) as local_blks_hit,
+  sum(local_blks_read) as local_blks_read,
+  sum(local_blks_dirtied) as local_blks_dirtied,
+  sum(local_blks_written) as local_blks_written,
+  sum(temp_blks_read) as temp_blks_read,
+  sum(temp_blks_written) as temp_blks_written,
+  sum(blk_read_time) as blk_read_time,
+  sum(blk_write_time) as blk_write_time,
+  array_agg(queryid) as queryids -- 9.4+
+from pg_stat_statements
+group by userid, dbid, query
+order by sum(total_exec_time) desc
+limit 50'''
+btree_estimation = '''with step1 as (
+  select
+    i.nspname as schema_name,
+    i.tblname as table_name,
+    i.idxname as index_name,
+    i.reltuples,
+    i.relpages,
+    i.relam,
+    a.attrelid AS table_oid,
+    current_setting('block_size')::numeric AS bs,
+    fillfactor,
+    -- MAXALIGN: 4 on 32bits, 8 on 64bits (and mingw32 ?)
+    case when version() ~ 'mingw32|64-bit|x86_64|ppc64|ia64|amd64' then 8 else 4 end as maxalign,
+    /* per page header, fixed size: 20 for 7.X, 24 for others */
+    24 AS pagehdr,
+    /* per page btree opaque data */
+    16 AS pageopqdata,
+    /* per tuple header: add IndexAttributeBitMapData if some cols are null-able */
+    case
+      when max(coalesce(s.null_frac,0)) = 0 then 2
+      else 2 + (( 32 + 8 - 1 ) / 8)
+    end as index_tuple_hdr_bm,
+    sum((1 - coalesce(s.null_frac, 0)) * coalesce(s.avg_width, 1024)) as nulldatawidth,
+    max(case when a.atttypid = 'pg_catalog.name'::regtype then 1 else 0 end) > 0 as is_na
+  from pg_attribute as a
+  join (
+    select
+      nspname, tbl.relname AS tblname, idx.relname AS idxname, idx.reltuples, idx.relpages, idx.relam,
+      indrelid, indexrelid, indkey::smallint[] AS attnum,
+      coalesce(substring(array_to_string(idx.reloptions, ' ') from 'fillfactor=([0-9]+)')::smallint, 90) as fillfactor
+    from pg_index
+    join pg_class idx on idx.oid = pg_index.indexrelid
+    join pg_class tbl on tbl.oid = pg_index.indrelid
+    join pg_namespace on pg_namespace.oid = idx.relnamespace
+    where pg_index.indisvalid AND tbl.relkind = 'r' AND idx.relpages > 0
+  ) as i on a.attrelid = i.indexrelid
+  join pg_stats as s on
+    s.schemaname = i.nspname
+    and (
+      (s.tablename = i.tblname and s.attname = pg_catalog.pg_get_indexdef(a.attrelid, a.attnum, true))
+      OR (s.tablename = i.idxname AND s.attname = a.attname)
+    )
+  join pg_type as t on a.atttypid = t.oid
+  where a.attnum > 0
+  group by 1, 2, 3, 4, 5, 6, 7, 8, 9
+), step2 as (
+  select
+    *,
+    (
+      index_tuple_hdr_bm + maxalign
+      - case when index_tuple_hdr_bm % maxalign = 0 THEN maxalign else index_tuple_hdr_bm % maxalign end
+      + nulldatawidth + maxalign
+      - case
+          when nulldatawidth = 0 then 0
+          when nulldatawidth::integer % maxalign = 0 then maxalign
+          else nulldatawidth::integer % maxalign
+        end
+    )::numeric as nulldatahdrwidth
+  from step1
+), step3 as (
+  select
+    *,
+    coalesce(1 + ceil(reltuples / floor((bs - pageopqdata - pagehdr) / (4 + nulldatahdrwidth)::float)), 0) as est_pages,
+    coalesce(1 + ceil(reltuples / floor((bs - pageopqdata - pagehdr) * fillfactor / (100 * (4 + nulldatahdrwidth)::float))), 0) as est_pages_ff
+  from step2
+  join pg_am am on step2.relam = am.oid
+  where am.amname = 'btree'
+), step4 as (
+  SELECT
+    *,
+    bs*(relpages)::bigint AS real_size,
+    bs*(relpages-est_pages)::bigint AS extra_size,
+    100 * (relpages-est_pages)::float / relpages AS extra_ratio,
+    bs*(relpages-est_pages_ff) AS bloat_size,
+    100 * (relpages-est_pages_ff)::float / relpages AS bloat_ratio
+  from step3
+)
+select
+  case is_na when true then 'TRUE' else '' end as "Is N/A",
+  format(
+    $out$%s
+  (%s)$out$,
+    left(index_name, 50) || case when length(index_name) > 50 then '…' else '' end,
+    coalesce(nullif(schema_name, 'public') || '.', '') || table_name
+  ) as "Index (Table)",
+  pg_size_pretty(real_size::numeric) as "Size",
+  case
+    when extra_size::numeric >= 0
+      then '~' || pg_size_pretty(extra_size::numeric)::text || ' (' || round(extra_ratio::numeric, 2)::text || '%)'
+    else null
+  end  as "Extra",
+  case
+    when bloat_size::numeric >= 0
+      then '~' || pg_size_pretty(bloat_size::numeric)::text || ' (' || round(bloat_ratio::numeric, 2)::text || '%)'
+    else null
+  end as "Bloat",
+  case
+    when (real_size - bloat_size)::numeric >=0
+      then '~' || pg_size_pretty((real_size - bloat_size)::numeric)
+      else null
+   end as "Live",
+  fillfactor
+from step4
+order by real_size desc nulls last'''
+pf_index_migration = '''with unused as (
+  select
+      format('unused (idx_scan: %s)', pg_stat_user_indexes.idx_scan)::text as reason,
+      pg_stat_user_indexes.relname as table_name,
+      pg_stat_user_indexes.schemaname || '.' || indexrelname::text as index_name,
+      pg_stat_user_indexes.idx_scan,
+      (coalesce(n_tup_ins, 0) + coalesce(n_tup_upd, 0) - coalesce(n_tup_hot_upd, 0) + coalesce(n_tup_del, 0)) as write_activity,
+      pg_stat_user_tables.seq_scan,
+      pg_stat_user_tables.n_live_tup,
+      pg_get_indexdef(pg_index.indexrelid) as index_def,
+      pg_size_pretty(pg_relation_size(pg_index.indexrelid::regclass)) as index_size,
+      pg_index.indexrelid
+  from pg_stat_user_indexes
+  join pg_stat_user_tables
+      on pg_stat_user_indexes.relid = pg_stat_user_tables.relid
+  join pg_index
+      ON pg_index.indexrelid = pg_stat_user_indexes.indexrelid
+  where
+      pg_stat_user_indexes.idx_scan = 0 /* < 10 or smth */
+      and pg_index.indisunique is false
+      and pg_stat_user_indexes.idx_scan::float/(coalesce(n_tup_ins,0)+coalesce(n_tup_upd,0)-coalesce(n_tup_hot_upd,0)+coalesce(n_tup_del,0)+1)::float<0.01
+), index_data as (
+  select
+    *,
+    indkey::text as columns,
+    array_to_string(indclass, ', ') as opclasses
+  from pg_index
+), redundant as (
+  select
+    i2.indrelid::regclass::text as table_name,
+    i2.indexrelid::regclass::text as index_name,
+    am1.amname as access_method,
+    format('redundant to index: %I', i1.indexrelid::regclass)::text as reason,
+    pg_get_indexdef(i1.indexrelid) main_index_def,
+    pg_get_indexdef(i2.indexrelid) index_def,
+    pg_size_pretty(pg_relation_size(i2.indexrelid)) index_size,
+    s.idx_scan as index_usage,
+    i2.indexrelid
+  from
+    index_data as i1
+    join index_data as i2 on (
+        i1.indrelid = i2.indrelid /* same table */
+        and i1.indexrelid <> i2.indexrelid /* NOT same index */
+    )
+    inner join pg_opclass op1 on i1.indclass[0] = op1.oid
+    inner join pg_opclass op2 on i2.indclass[0] = op2.oid
+    inner join pg_am am1 on op1.opcmethod = am1.oid
+    inner join pg_am am2 on op2.opcmethod = am2.oid
+    join pg_stat_user_indexes as s on s.indexrelid = i2.indexrelid
+  where
+    not i1.indisprimary -- index 1 is not primary
+    and not ( -- skip if index1 is (primary or uniq) and is NOT (primary and uniq)
+        (i1.indisprimary or i1.indisunique)
+        and (not i2.indisprimary or not i2.indisunique)
+    )
+    and  am1.amname = am2.amname -- same access type
+    and (
+      i2.columns like (i1.columns || '%') -- index 2 includes all columns from index 1
+      or i1.columns = i2.columns -- index1 and index 2 includes same columns
+    )
+    and (
+      i2.opclasses like (i1.opclasses || '%')
+      or i1.opclasses = i2.opclasses
+    )
+    -- index expressions are same
+    and pg_get_expr(i1.indexprs, i1.indrelid) is not distinct from pg_get_expr(i2.indexprs, i2.indrelid)
+    -- index predicates are same
+    and pg_get_expr(i1.indpred, i1.indrelid) is not distinct from pg_get_expr(i2.indpred, i2.indrelid)
+), together as (
+  select reason, table_name, index_name, index_size, index_def, null as main_index_def, indexrelid
+  from unused
+  union all
+  select reason, table_name, index_name, index_size, index_def, main_index_def, indexrelid
+  from redundant
+  where index_usage = 0
+), droplines as (
+  select format('DROP INDEX CONCURRENTLY %s; -- %s, %s, table %s', max(index_name), max(index_size), string_agg(reason, ', '), table_name) as line
+  from together t1
+  group by table_name, index_name
+  order by table_name, index_name
+), createlines as (
+  select
+    replace(
+      format('%s; -- table %s', max(index_def), table_name),
+      'CREATE INDEX',
+      'CREATE INDEX CONCURRENTLY'
+    )as line
+  from together t2
+  group by table_name, index_name
+  order by table_name, index_name
+)
+select '-- DO migration: --' as run_in_separate_transactions
+union all
+select * from droplines
+union all
+select ''
+union all
+select '-- UNDO migration: --'
+union all
+select * from createlines'''
+pf_index_duplicate = '''with fk_indexes as (
+   select
+     n.nspname as schema_name,
+     ci.relname as index_name,
+     cr.relname as table_name,
+     (confrelid::regclass)::text as fk_table_ref,
+     array_to_string(indclass, ', ') as opclasses
+   from pg_index i
+   join pg_class ci on ci.oid = i.indexrelid and ci.relkind = 'i'
+   join pg_class cr on cr.oid = i.indrelid and cr.relkind = 'r'
+   join pg_namespace n on n.oid = ci.relnamespace
+   join pg_constraint cn on cn.conrelid = cr.oid
+   left join pg_stat_user_indexes si on si.indexrelid = i.indexrelid
+   where
+      contype = 'f'
+      and i.indisunique is false
+      and conkey is not null
+      and ci.relpages > 0 -- raise for a DB with a lot of indexes
+      and si.idx_scan < 10
+ ),
+ -- Redundant indexes
+ index_data as (
+   select
+     *,
+     (select string_agg(lpad(i, 3, '0'), ' ') from unnest(string_to_array(indkey::text, ' ')) i) as columns,
+     array_to_string(indclass, ', ') as opclasses
+   from pg_index i
+   join pg_class ci on ci.oid = i.indexrelid and ci.relkind = 'i'
+   where indisvalid = true and ci.relpages > 0 -- raise for a DD with a lot of indexes
+ ), redundant_indexes as (
+   select
+     i2.indexrelid as index_id,
+     tnsp.nspname AS schema_name,
+     trel.relname AS table_name,
+     pg_relation_size(trel.oid) as table_size_bytes,
+     irel.relname AS index_name,
+     am1.amname as access_method,
+     (i1.indexrelid::regclass)::text as reason,
+     i1.indexrelid as reason_index_id,
+     pg_get_indexdef(i1.indexrelid) main_index_def,
+     pg_size_pretty(pg_relation_size(i1.indexrelid)) main_index_size,
+     pg_get_indexdef(i2.indexrelid) index_def,
+     pg_relation_size(i2.indexrelid) index_size_bytes,
+     s.idx_scan as index_usage,
+     quote_ident(tnsp.nspname) as formated_schema_name,
+     coalesce(nullif(quote_ident(tnsp.nspname), 'public') || '.', '') || quote_ident(irel.relname) as formated_index_name,
+     quote_ident(trel.relname) AS formated_table_name,
+     coalesce(nullif(quote_ident(tnsp.nspname), 'public') || '.', '') || quote_ident(trel.relname) as formated_relation_name,
+     i2.opclasses
+   from
+     index_data as i1
+     join index_data as i2 on (
+         i1.indrelid = i2.indrelid -- same table
+         and i1.indexrelid <> i2.indexrelid -- NOT same index
+     )
+     inner join pg_opclass op1 on i1.indclass[0] = op1.oid
+     inner join pg_opclass op2 on i2.indclass[0] = op2.oid
+     inner join pg_am am1 on op1.opcmethod = am1.oid
+     inner join pg_am am2 on op2.opcmethod = am2.oid
+     join pg_stat_user_indexes as s on s.indexrelid = i2.indexrelid
+     join pg_class as trel on trel.oid = i2.indrelid
+     join pg_namespace as tnsp on trel.relnamespace = tnsp.oid
+     join pg_class as irel on irel.oid = i2.indexrelid
+   where
+     not i2.indisprimary -- index 1 is not primary
+     and not ( -- skip if index1 is (primary or uniq) and is NOT (primary and uniq)
+         i2.indisunique and not i1.indisprimary
+     )
+     and am1.amname = am2.amname -- same access type
+     and i1.columns like (i2.columns || '%') -- index 2 includes all columns from index 1
+     and i1.opclasses like (i2.opclasses || '%')
+     -- index expressions is same
+     and pg_get_expr(i1.indexprs, i1.indrelid) is not distinct from pg_get_expr(i2.indexprs, i2.indrelid)
+     -- index predicates is same
+     and pg_get_expr(i1.indpred, i1.indrelid) is not distinct from pg_get_expr(i2.indpred, i2.indrelid)
+ ), redundant_indexes_fk as (
+   select
+     ri.*,
+     (
+       select count(1)
+       from fk_indexes fi
+       where
+         fi.fk_table_ref = ri.table_name
+         and fi.opclasses like (ri.opclasses || '%')
+      ) > 0 as supports_fk
+   from redundant_indexes ri
+ ),
+ -- Cut recursive links
+ redundant_indexes_tmp_num as (
+   select
+     row_number() over () num,
+     rig.*
+   from redundant_indexes_fk rig
+   order by index_id
+ ), redundant_indexes_tmp_cut as (
+   select
+     ri1.*,
+     ri2.num as r_num
+   from redundant_indexes_tmp_num ri1
+   left join redundant_indexes_tmp_num ri2 on ri2.reason_index_id = ri1.index_id and ri1.reason_index_id = ri2.index_id
+   where ri1.num < ri2.num or ri2.num is null
+ ), redundant_indexes_cut_grouped as (
+   select
+     distinct(num),
+     *
+   from redundant_indexes_tmp_cut
+   order by index_size_bytes desc
+ ), redundant_indexes_grouped as (
+   select
+     distinct(num),
+     *
+   from redundant_indexes_tmp_cut
+   order by index_size_bytes desc
+ )
+ select
+   schema_name,
+   table_name,
+   table_size_bytes,
+   index_name,
+   access_method,
+   string_agg(distinct reason, ', ') as redundant_to,
+   string_agg(main_index_def, ', ') as main_index_def,
+   string_agg(main_index_size, ', ') as main_index_size,
+   index_def,
+   index_size_bytes,
+   index_usage,
+   supports_fk
+ from redundant_indexes_cut_grouped
+ group by
+   index_id,
+   schema_name,
+   table_name,
+   table_size_bytes,
+   index_name,
+   access_method,
+   index_def,
+   index_size_bytes,
+   index_usage,
+   supports_fk
+ order by index_size_bytes desc'''
+pf_index_usage = '''WITH table_scans as (
+     SELECT relid,
+         tables.idx_scan + tables.seq_scan as all_scans,
+         ( tables.n_tup_ins + tables.n_tup_upd + tables.n_tup_del ) as writes,
+                 pg_relation_size(relid) as table_size
+         FROM pg_stat_user_tables as tables
+ ),
+ all_writes as (
+     SELECT sum(writes) as total_writes
+     FROM table_scans
+ ),
+ indexes as (
+     SELECT idx_stat.relid, idx_stat.indexrelid,
+         idx_stat.schemaname, idx_stat.relname as tablename,
+         idx_stat.indexrelname as indexname,
+         idx_stat.idx_scan,
+         pg_relation_size(idx_stat.indexrelid) as index_bytes,
+         indexdef ~* 'USING btree' AS idx_is_btree
+     FROM pg_stat_user_indexes as idx_stat
+         JOIN pg_index
+             USING (indexrelid)
+         JOIN pg_indexes as indexes
+             ON idx_stat.schemaname = indexes.schemaname
+                 AND idx_stat.relname = indexes.tablename
+                 AND idx_stat.indexrelname = indexes.indexname
+     WHERE pg_index.indisunique = FALSE
+ ),
+ index_ratios AS (
+ SELECT schemaname, tablename, indexname,
+     idx_scan, all_scans,
+     round(( CASE WHEN all_scans = 0 THEN 0.0::NUMERIC
+         ELSE idx_scan::NUMERIC/all_scans * 100 END),2) as index_scan_pct,
+     writes,
+     round((CASE WHEN writes = 0 THEN idx_scan::NUMERIC ELSE idx_scan::NUMERIC/writes END),2)
+         as scans_per_write,
+     pg_size_pretty(index_bytes) as index_size,
+     pg_size_pretty(table_size) as table_size,
+     idx_is_btree, index_bytes
+     FROM indexes
+     JOIN table_scans
+     USING (relid)
+ ),
+ index_groups AS (
+ SELECT 'Never Used Indexes' as reason, *, 1 as grp
+ FROM index_ratios
+ WHERE
+     idx_scan = 0
+     and idx_is_btree
+ UNION ALL
+ SELECT 'Low Scans, High Writes' as reason, *, 2 as grp
+ FROM index_ratios
+ WHERE
+     scans_per_write <= 1
+     and index_scan_pct < 10
+     and idx_scan > 0
+     and writes > 100
+     and idx_is_btree
+ UNION ALL
+ SELECT 'Seldom Used Large Indexes' as reason, *, 3 as grp
+ FROM index_ratios
+ WHERE
+     index_scan_pct < 5
+     and scans_per_write > 1
+     and idx_scan > 0
+     and idx_is_btree
+     and index_bytes > 100000000
+ UNION ALL
+ SELECT 'High-Write Large Non-Btree' as reason, index_ratios.*, 4 as grp
+ FROM index_ratios, all_writes
+ WHERE
+     ( writes::NUMERIC / ( total_writes + 1 ) ) > 0.02
+     AND NOT idx_is_btree
+     AND index_bytes > 100000000
+ ORDER BY grp, index_bytes DESC )
+ SELECT
+     reason,
+     schemaname as schema_name,
+     tablename as table_name,
+     indexname as index_name,
+     index_scan_pct,
+     scans_per_write,
+     index_size,
+     table_size,
+     idx_scan,
+     all_scans
+ FROM index_groups'''
+
+pf_lock_analysis = '''SELECT *
+FROM (
+  VALUES
+  ('LWLock','ShmemIndex','Waiting to find or allocate space in shared memory.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','OidGen','Waiting to allocate a new OID.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','XidGen','Waiting to allocate a new transaction ID.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','ProcArray','Waiting to access the shared per-process data structures (typically, to get a snapshot or report a session''s transaction ID).','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','스냅샷 또는 트랜잭션 ID 처리 병목. 긴 트랜잭션 유무 확인. 트랜잭션 수 많은 OLTP에서 자주 발생.'),
+  ('LWLock','SInvalRead','Waiting to retrieve messages from the shared catalog invalidation queue.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SInvalWrite','Waiting to add a message to the shared catalog invalidation queue.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','WALBufMapping','Waiting to replace a page in WAL buffers.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','WAL 관련 병목 → WAL 파일 쓰기 속도가 느림. wal_writer_delay, wal_buffers 조정 또는 디스크 I/O 확인. 체크포인트 설정 확인도 필요.'),
+  ('LWLock','WALWrite','Waiting for WAL buffers to be written to disk.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','WAL 관련 병목 → WAL 파일 쓰기 속도가 느림. wal_writer_delay, wal_buffers 조정 또는 디스크 I/O 확인. 체크포인트 설정 확인도 필요.'),
+  ('LWLock','ControlFile','Waiting to read or update the pg_control file or create a new WAL file.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','XactControl','Waiting to access the transaction status SLRU cache.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SubtransAllocation','Waiting to access the sub-transaction SLRU cache.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','MultiXactGen','Waiting to read or update shared multixact state.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','RelCacheInit','Waiting to read or update a pg_internal.init relation cache initialization file.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','CheckpointerComm','Waiting to manage fsync requests.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','TwoPhaseState','Waiting to read or update the state of prepared transactions.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','TablespaceCreate','Waiting to create or drop a tablespace.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','BtreeVacuum','Waiting to read or update vacuum-related information for a B-tree index.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','AddinShmemInit','Waiting to manage an extension''s space allocation in shared memory.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','Autovacuum','Waiting to read or update the current state of autovacuum workers.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','AutovacuumSchedule','Waiting to ensure that a table selected for autovacuum still needs vacuuming.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SyncScan','Waiting to select the starting location of a synchronized table scan.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','RelationMapping','Waiting to read or update a pg_filenode.map file (used to track the filenode assignments of certain system catalogs).','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','NotifyQueue','Waiting to read or update NOTIFY messages.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SerializableXactHash','Waiting to read or update information about serializable transactions.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SerializableFinishedList','Waiting to access the list of finished serializable transactions.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SerializablePredicateList','Waiting to access the list of predicate locks held by serializable transactions.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SyncRep','Waiting to read or update information about the state of synchronous replication.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','BackgroundWorker','Waiting to read or update background worker state.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','DynamicSharedMemoryControl','Waiting to read or update dynamic shared memory allocation information.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','AutoFile','Waiting to update the postgresql.auto.conf file.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','ReplicationSlotAllocation','Waiting to allocate or free a replication slot.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','ReplicationSlotControl','Waiting to read or update replication slot state.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','CommitTs','Waiting to read or update the last value set for a transaction commit timestamp.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','ReplicationOrigin','Waiting to create, drop or use a replication origin.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','MultiXactTruncation','Waiting to read or truncate multixact information.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','LogicalRepWorker','Waiting to read or update the state of logical replication workers.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','XactTruncation','Waiting to execute pg_xact_status or update the oldest transaction ID available to it.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','WrapLimitsVacuum','Waiting to update limits on transaction id and multixact consumption.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','NotifyQueueTail','Waiting to update limit on NOTIFY message storage.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','WaitEventExtension','Waiting to read or update custom wait events information for extensions.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','WALSummarizer','Waiting to read or update WAL summarization state.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','WAL 관련 병목 → WAL 파일 쓰기 속도가 느림. wal_writer_delay, wal_buffers 조정 또는 디스크 I/O 확인. 체크포인트 설정 확인도 필요.'),
+  ('LWLock','DSMRegistry','Waiting to read or update the dynamic shared memory registry.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','InjectionPoint','Waiting to read or update information related to injection points.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SerialControl','Waiting to read or update shared pg_serial state.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','XactBuffer','Waiting for I/O on a transaction status SLRU buffer.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','버퍼 관리 병목 → shared_buffers 크기 조정 검토. 병렬 쿼리 또는 대량 DML이 원인일 수 있음.'),
+  ('LWLock','CommitTsBuffer','Waiting for I/O on a commit timestamp SLRU buffer.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','버퍼 관리 병목 → shared_buffers 크기 조정 검토. 병렬 쿼리 또는 대량 DML이 원인일 수 있음.'),
+  ('LWLock','SubtransBuffer','Waiting for I/O on a sub-transaction SLRU buffer.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','버퍼 관리 병목 → shared_buffers 크기 조정 검토. 병렬 쿼리 또는 대량 DML이 원인일 수 있음.'),
+  ('LWLock','MultiXactOffsetBuffer','Waiting for I/O on a multixact offset SLRU buffer.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','버퍼 관리 병목 → shared_buffers 크기 조정 검토. 병렬 쿼리 또는 대량 DML이 원인일 수 있음.'),
+  ('LWLock','MultiXactMemberBuffer','Waiting for I/O on a multixact member SLRU buffer.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','버퍼 관리 병목 → shared_buffers 크기 조정 검토. 병렬 쿼리 또는 대량 DML이 원인일 수 있음.'),
+  ('LWLock','NotifyBuffer','Waiting for I/O on a NOTIFY message SLRU buffer.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','버퍼 관리 병목 → shared_buffers 크기 조정 검토. 병렬 쿼리 또는 대량 DML이 원인일 수 있음.'),
+  ('LWLock','SerialBuffer','Waiting for I/O on a serializable transaction conflict SLRU buffer.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','버퍼 관리 병목 → shared_buffers 크기 조정 검토. 병렬 쿼리 또는 대량 DML이 원인일 수 있음.'),
+  ('LWLock','WALInsert','Waiting to insert WAL data into a memory buffer.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','WAL 관련 병목 → WAL 파일 쓰기 속도가 느림. wal_writer_delay, wal_buffers 조정 또는 디스크 I/O 확인. 체크포인트 설정 확인도 필요.'),
+  ('LWLock','BufferContent','Waiting to access a data page in memory.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','버퍼 관리 병목 → shared_buffers 크기 조정 검토. 병렬 쿼리 또는 대량 DML이 원인일 수 있음.'),
+  ('LWLock','ReplicationOriginState','Waiting to read or update the progress of one replication origin.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','ReplicationSlotIO','Waiting for I/O on a replication slot.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','LockFastPath','Waiting to read or update a process'' fast-path lock information.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','BufferMapping','Waiting to associate a data block with a buffer in the buffer pool.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','버퍼 관리 병목 → shared_buffers 크기 조정 검토. 병렬 쿼리 또는 대량 DML이 원인일 수 있음.'),
+  ('LWLock','LockManager','Waiting to read or update information about "heavyweight" locks.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','PredicateLockManager','Waiting to access predicate lock information used by serializable transactions.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','ParallelHashJoin','Waiting to synchronize workers during Parallel Hash Join plan execution.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','ParallelQueryDSA','Waiting for parallel query dynamic shared memory allocation.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','PerSessionDSA','Waiting for parallel query dynamic shared memory allocation.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','PerSessionRecordType','Waiting to access a parallel query''s information about composite types.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','PerSessionRecordTypmod','Waiting to access a parallel query''s information about type modifiers that identify anonymous record types.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SharedTupleStore','Waiting to access a shared tuple store during parallel query.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SharedTidBitmap','Waiting to access a shared TID bitmap during a parallel bitmap index scan.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','ParallelAppend','Waiting to choose the next subplan during Parallel Append plan execution.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','PerXactPredicateList','Waiting to access the list of predicate locks held by the current serializable transaction during a parallel query.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','PgStatsDSA','Waiting for stats dynamic shared memory allocator access.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','PgStatsHash','Waiting for stats shared memory hash table access.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','PgStatsData','Waiting for shared memory stats data access.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','LogicalRepLauncherDSA','Waiting to access logical replication launcher''s dynamic shared memory allocator.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','LogicalRepLauncherHash','Waiting to access logical replication launcher''s shared hash table.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','DSMRegistryDSA','Waiting to access dynamic shared memory registry''s dynamic shared memory allocator.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','DSMRegistryHash','Waiting to access dynamic shared memory registry''s shared hash table.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','CommitTsSLRU','Waiting to access the commit timestamp SLRU cache.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','MultiXactOffsetSLRU','Waiting to access the multixact offset SLRU cache.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','MultiXactMemberSLRU','Waiting to access the multixact member SLRU cache.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','NotifySLRU','Waiting to access the NOTIFY message SLRU cache.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SerialSLRU','Waiting to access the serializable transaction conflict SLRU cache.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','SubtransSLRU','Waiting to access the sub-transaction SLRU cache.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','XactSLRU','Waiting to access the transaction status SLRU cache.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('LWLock','ParallelVacuumDSA','Waiting for parallel vacuum dynamic shared memory allocation.','공유 자원 경합 → 관련 파라미터 조정 또는 트랜잭션 수 줄이기. 고빈도 발생 시 autovacuum/vacuum, WAL, lock 관련 병목 의심.','공유 메모리 자원 경합. vacuum, autovacuum, shared memory 관련 파라미터 조정 필요.'),
+  ('Lock','Relation','Waiting to acquire a lock on a relation.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','DML 충돌에 의한 락 경합. 느린 쿼리, 인덱스 부재 또는 동시성 로직 문제. 관련 트랜잭션 식별 후 쿼리 튜닝 필요.'),
+  ('Lock','Extend','Waiting to extend a relation.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','락 경합. 쿼리 분석 및 lock 대기 시간 모니터링 필요.'),
+  ('Lock','Frozenid','Waiting to update pg_database.datfrozenxid and pg_database.datminmxid.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','락 경합. 쿼리 분석 및 lock 대기 시간 모니터링 필요.'),
+  ('Lock','Page','Waiting to acquire a lock on a page of a relation.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','DML 충돌에 의한 락 경합. 느린 쿼리, 인덱스 부재 또는 동시성 로직 문제. 관련 트랜잭션 식별 후 쿼리 튜닝 필요.'),
+  ('Lock','Tuple','Waiting to acquire a lock on a tuple.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','DML 충돌에 의한 락 경합. 느린 쿼리, 인덱스 부재 또는 동시성 로직 문제. 관련 트랜잭션 식별 후 쿼리 튜닝 필요.'),
+  ('Lock','Transactionid','Waiting for a transaction to finish.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','다른 트랜잭션 종료 대기 중. pg_stat_activity에서 xact_start 오래된 세션 파악 후 종료 검토.'),
+  ('Lock','Virtualxid','Waiting to acquire a virtual transaction ID lock','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','DDL과 vacuum 또는 병렬 작업 충돌 가능성. 메인터넌스 작업 스케줄 조정 필요.'),
+  ('Lock','Spectoken','Waiting to acquire a speculative insertion lock.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','락 경합. 쿼리 분석 및 lock 대기 시간 모니터링 필요.'),
+  ('Lock','Object','Waiting to acquire a lock on a non-relation database object.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','락 경합. 쿼리 분석 및 lock 대기 시간 모니터링 필요.'),
+  ('Lock','Userlock','Waiting to acquire a user lock.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','락 경합. 쿼리 분석 및 lock 대기 시간 모니터링 필요.'),
+  ('Lock','Advisory','Waiting to acquire an advisory user lock.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','락 경합. 쿼리 분석 및 lock 대기 시간 모니터링 필요.'),
+  ('Lock','ApplyTransaction','Waiting to acquire a lock on a remote transaction being applied by a logical replication subscriber.','락 대기 → 트랜잭션 지속 시간 확인, 필요한 경우 lock 강제 해제. 쿼리 튜닝, 인덱싱 또는 동시성 제어 검토.','락 경합. 쿼리 분석 및 lock 대기 시간 모니터링 필요.'),
+  ('BufferPin','BufferPin','Waiting to acquire an exclusive pin on a buffer.','다른 세션에서 버퍼를 고정 중 → 롱 트랜잭션 또는 느린 쿼리가 블로킹 중일 수 있음. 해당 세션 파악 및 처리.','다른 세션이 버퍼를 고정 중 → 롱 트랜잭션 또는 커밋 지연 원인. pg_stat_activity에서 블로킹 세션 추적.'),
+  ('Activity','ArchiverMain','Waiting in main loop of archiver process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','AutovacuumMain','Waiting in main loop of autovacuum launcher process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','BgwriterHibernate','Waiting in background writer process, hibernating.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','BgwriterMain','Waiting in main loop of background writer process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','CheckpointerMain','Waiting in main loop of checkpointer process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','LogicalApplyMain','Waiting in main loop of logical replication apply process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','LogicalLauncherMain','Waiting in main loop of logical replication launcher process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','LogicalParallelApplyMain','Waiting in main loop of logical replication parallel apply process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','RecoveryWalStream','Waiting in main loop of startup process for WAL to arrive, during streaming recovery.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','ReplicationSlotsyncMain','Waiting in main loop of slot sync worker.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','ReplicationSlotsyncShutdown','Waiting for slot sync worker to shut down.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','SysloggerMain','Waiting in main loop of syslogger process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','WalReceiverMain','Waiting in main loop of WAL receiver process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','WalSenderMain','Waiting in main loop of WAL sender process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','WalSummarizerWal','Waiting in WAL summarizer for more WAL to be generated.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Activity','WalWriterMain','Waiting in main loop of WAL writer process.','백그라운드 프로세스 루프 대기 상태. 문제는 아니며 정상적인 상태일 수 있음.','백그라운드 프로세스 루프 중 정상 대기 상태. 문제 상황은 아님. 지속 대기 시 로깅 설정 확인.'),
+  ('Client','ClientRead','Waiting to read data from the client.','클라이언트 I/O 대기 → 연결 지연 또는 클라이언트 네트워크 상태 확인.','클라이언트 네트워크 대기. client가 데이터 수신/송신을 지연하고 있는 상태. 커넥션 pool 설정 또는 네트워크 상태 점검.'),
+  ('Client','ClientWrite','Waiting to write data to the client.','클라이언트 I/O 대기 → 연결 지연 또는 클라이언트 네트워크 상태 확인.','클라이언트 네트워크 대기. client가 데이터 수신/송신을 지연하고 있는 상태. 커넥션 pool 설정 또는 네트워크 상태 점검.'),
+  ('Client','GssOpenServer','Waiting to read data from the client while establishing a GSSAPI session.','클라이언트 I/O 대기 → 연결 지연 또는 클라이언트 네트워크 상태 확인.','클라이언트 네트워크 대기. client가 데이터 수신/송신을 지연하고 있는 상태. 커넥션 pool 설정 또는 네트워크 상태 점검.'),
+  ('Client','LibpqwalreceiverConnect','Waiting in WAL receiver to establish connection to remote server.','클라이언트 I/O 대기 → 연결 지연 또는 클라이언트 네트워크 상태 확인.','클라이언트 네트워크 대기. client가 데이터 수신/송신을 지연하고 있는 상태. 커넥션 pool 설정 또는 네트워크 상태 점검.'),
+  ('Client','LibpqwalreceiverReceive','Waiting in WAL receiver to receive data from remote server.','클라이언트 I/O 대기 → 연결 지연 또는 클라이언트 네트워크 상태 확인.','클라이언트 네트워크 대기. client가 데이터 수신/송신을 지연하고 있는 상태. 커넥션 pool 설정 또는 네트워크 상태 점검.'),
+  ('Client','SslOpenServer','Waiting for SSL while attempting connection.','클라이언트 I/O 대기 → 연결 지연 또는 클라이언트 네트워크 상태 확인.','클라이언트 네트워크 대기. client가 데이터 수신/송신을 지연하고 있는 상태. 커넥션 pool 설정 또는 네트워크 상태 점검.'),
+  ('Client','WaitForStandbyConfirmation','Waiting for WAL to be received and flushed by the physical standby.','클라이언트 I/O 대기 → 연결 지연 또는 클라이언트 네트워크 상태 확인.','클라이언트 네트워크 대기. client가 데이터 수신/송신을 지연하고 있는 상태. 커넥션 pool 설정 또는 네트워크 상태 점검.'),
+  ('Client','WaitForWalReplay','Waiting for a replay of the particular WAL position on the physical standby.','클라이언트 I/O 대기 → 연결 지연 또는 클라이언트 네트워크 상태 확인.','클라이언트 네트워크 대기. client가 데이터 수신/송신을 지연하고 있는 상태. 커넥션 pool 설정 또는 네트워크 상태 점검.'),
+  ('Client','WalSenderWaitForWal','Waiting for WAL to be flushed in WAL sender process.','클라이언트 I/O 대기 → 연결 지연 또는 클라이언트 네트워크 상태 확인.','클라이언트 네트워크 대기. client가 데이터 수신/송신을 지연하고 있는 상태. 커넥션 pool 설정 또는 네트워크 상태 점검.'),
+  ('Client','WalSenderWriteData','Waiting for any activity when processing replies from WAL receiver in WAL sender process.','클라이언트 I/O 대기 → 연결 지연 또는 클라이언트 네트워크 상태 확인.','클라이언트 네트워크 대기. client가 데이터 수신/송신을 지연하고 있는 상태. 커넥션 pool 설정 또는 네트워크 상태 점검.'),
+  ('Extension','Extension','Waiting in an extension.','확장 모듈 내부 대기 → 확장 로그나 문서 확인 필요.','확장 기능 내부 대기. 확장 모듈의 설정 또는 충돌 가능성. 관련 문서/로그 분석 필요.'),
+  ('IPC','AppendReady','Waiting for subplan nodes of an Append plan node to be ready.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','ArchiveCleanupCommand','Waiting for <xref linkend=guc-archive-cleanup-command/> to complete.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','ArchiveCommand','Waiting for <xref linkend=guc-archive-command/> to complete.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','BackendTermination','Waiting for the termination of another backend.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','BackupWaitWalArchive','Waiting for WAL files required for a backup to be successfully archived.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','BgworkerShutdown','Waiting for background worker to shut down.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','BgworkerStartup','Waiting for background worker to start up.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','BtreePage','Waiting for the page number needed to continue a parallel B-tree scan to become available.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','BufferIo','Waiting for buffer I/O to complete.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','CheckpointDelayComplete','Waiting for a backend that blocks a checkpoint from completing.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','CheckpointDelayStart','Waiting for a backend that blocks a checkpoint from starting.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','CheckpointDone','Waiting for a checkpoint to complete.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','CheckpointStart','Waiting for a checkpoint to start.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','ExecuteGather','Waiting for activity from a child process while executing a Gather plan node.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashBatchAllocate','Waiting for an elected Parallel Hash participant to allocate a hash table.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashBatchElect','Waiting to elect a Parallel Hash participant to allocate a hash table.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashBatchLoad','Waiting for other Parallel Hash participants to finish loading a hash table.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashBuildAllocate','Waiting for an elected Parallel Hash participant to allocate the initial hash table.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashBuildElect','Waiting to elect a Parallel Hash participant to allocate the initial hash table.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashBuildHashInner','Waiting for other Parallel Hash participants to finish hashing the inner relation.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashBuildHashOuter','Waiting for other Parallel Hash participants to finish partitioning the outer relation.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashGrowBatchesDecide','Waiting to elect a Parallel Hash participant to decide on future batch growth.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashGrowBatchesElect','Waiting to elect a Parallel Hash participant to allocate more batches.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashGrowBatchesFinish','Waiting for an elected Parallel Hash participant to decide on future batch growth.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashGrowBatchesReallocate','Waiting for an elected Parallel Hash participant to allocate more batches.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashGrowBatchesRepartition','Waiting for other Parallel Hash participants to finish repartitioning.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashGrowBucketsElect','Waiting to elect a Parallel Hash participant to allocate more buckets.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashGrowBucketsReallocate','Waiting for an elected Parallel Hash participant to finish allocating more buckets.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','HashGrowBucketsReinsert','Waiting for other Parallel Hash participants to finish inserting tuples into new buckets.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','LogicalApplySendData','Waiting for a logical replication leader apply process to send data to a parallel apply process.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','LogicalParallelApplyStateChange','Waiting for a logical replication parallel apply process to change state.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','LogicalSyncData','Waiting for a logical replication remote server to send data for initial table synchronization.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','LogicalSyncStateChange','Waiting for a logical replication remote server to change state.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','MessageQueueInternal','Waiting for another process to be attached to a shared message queue.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','MessageQueuePutMessage','Waiting to write a protocol message to a shared message queue.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','MessageQueueReceive','Waiting to receive bytes from a shared message queue.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','MessageQueueSend','Waiting to send bytes to a shared message queue.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','MultixactCreation','Waiting for a multixact creation to complete.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','ParallelBitmapScan','Waiting for parallel bitmap scan to become initialized.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','ParallelCreateIndexScan','Waiting for parallel CREATE INDEX workers to finish heap scan.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','ParallelFinish','Waiting for parallel workers to finish computing.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','ProcarrayGroupUpdate','Waiting for the group leader to clear the transaction ID at transaction end.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','ProcSignalBarrier','Waiting for a barrier event to be processed by all backends.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','Promote','Waiting for standby promotion.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','RecoveryConflictSnapshot','Waiting for recovery conflict resolution for a vacuum cleanup.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','RecoveryConflictTablespace','Waiting for recovery conflict resolution for dropping a tablespace.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','RecoveryEndCommand','Waiting for <xref linkend=guc-recovery-end-command/> to complete.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','RecoveryPause','Waiting for recovery to be resumed.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','ReplicationOriginDrop','Waiting for a replication origin to become inactive so it can be dropped.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','ReplicationSlotDrop','Waiting for a replication slot to become inactive so it can be dropped.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','RestoreCommand','Waiting for <xref linkend=guc-restore-command/> to complete.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','SafeSnapshot','Waiting to obtain a valid snapshot for a READ ONLY DEFERRABLE transaction.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','SyncRep','Waiting for confirmation from a remote server during synchronous replication.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','WalReceiverExit','Waiting for the WAL receiver to exit.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','WalReceiverWaitStart','Waiting for startup process to send initial data for streaming replication.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','WalSummaryReady','Waiting for a new WAL summary to be generated.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('IPC','XactGroupUpdate','Waiting for the group leader to update transaction status at transaction end.','병렬 처리 또는 백엔드 간 동기화 대기 → 워크로드 분산 및 병렬 전략 확인.','백엔드/병렬 처리 동기화 대기. 병렬 쿼리 또는 logical replication 등의 대기일 수 있음. 병렬 워크로드 튜닝 필요.'),
+  ('Timeout','BaseBackupThrottle','Waiting during base backup when throttling activity.','의도적 대기 (예: sleep) → 문제가 되는 경우 설정 확인 필요.','의도적 대기 또는 백오프 로직. sleep 또는 retry 관련 설정 점검. 장시간 지속 시 설정 오류 의심.'),
+  ('Timeout','PgSleep','Waiting between writes while performing a checkpoint.','의도적 대기 (예: sleep) → 문제가 되는 경우 설정 확인 필요.','의도적 대기 또는 백오프 로직. sleep 또는 retry 관련 설정 점검. 장시간 지속 시 설정 오류 의심.'),
+  ('Timeout','RecoveryApplyDelay','Waiting due to a call to pg_sleep or a sibling function.','의도적 대기 (예: sleep) → 문제가 되는 경우 설정 확인 필요.','의도적 대기 또는 백오프 로직. sleep 또는 retry 관련 설정 점검. 장시간 지속 시 설정 오류 의심.'),
+  ('Timeout','RecoveryRetrieveRetryInterval','Waiting to apply WAL during recovery because of a delay setting.','의도적 대기 (예: sleep) → 문제가 되는 경우 설정 확인 필요.','의도적 대기 또는 백오프 로직. sleep 또는 retry 관련 설정 점검. 장시간 지속 시 설정 오류 의심.'),
+  ('Timeout','VacuumDelay','Waiting during recovery when WAL data is not available from any source (pg_wal, archive or stream).','의도적 대기 (예: sleep) → 문제가 되는 경우 설정 확인 필요.','의도적 대기 또는 백오프 로직. sleep 또는 retry 관련 설정 점검. 장시간 지속 시 설정 오류 의심.'),
+  ('Timeout','CheckpointWriteDelay','Waiting while sending synchronization requests to the checkpointer, because the request queue is full.','의도적 대기 (예: sleep) → 문제가 되는 경우 설정 확인 필요.','의도적 대기 또는 백오프 로직. sleep 또는 retry 관련 설정 점검. 장시간 지속 시 설정 오류 의심.'),
+  ('Timeout','RegisterSyncRequest','Waiting while acquiring a contended spinlock.','의도적 대기 (예: sleep) → 문제가 되는 경우 설정 확인 필요.','의도적 대기 또는 백오프 로직. sleep 또는 retry 관련 설정 점검. 장시간 지속 시 설정 오류 의심.'),
+  ('Timeout','SpinDelay','Waiting while acquiring a contended spinlock.','의도적 대기 (예: sleep) → 문제가 되는 경우 설정 확인 필요.','의도적 대기 또는 백오프 로직. sleep 또는 retry 관련 설정 점검. 장시간 지속 시 설정 오류 의심.'),
+  ('Timeout','VacuumTruncate','Waiting to acquire an exclusive lock to truncate off any empty pages at the end of a table vacuumed.','의도적 대기 (예: sleep) → 문제가 되는 경우 설정 확인 필요.','의도적 대기 또는 백오프 로직. sleep 또는 retry 관련 설정 점검. 장시간 지속 시 설정 오류 의심.'),
+  ('Timeout','WalSummarizerError','Waiting after a WAL summarizer error.','의도적 대기 (예: sleep) → 문제가 되는 경우 설정 확인 필요.','의도적 대기 또는 백오프 로직. sleep 또는 retry 관련 설정 점검. 장시간 지속 시 설정 오류 의심.'),
+  ('IO','AuroraEnhancedLogicalWalRead','Waiting for a read from Aurora enhanced logical WAL.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','BasebackupRead','Waiting for base backup to read from a file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','BasebackupSync','Waiting for data written by a base backup to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','BasebackupWrite','Waiting for base backup to write to a file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','BuffileRead','Waiting for a read from a buffered file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','BuffileWrite','Waiting for a write to a buffered file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','BuffileTruncate','Waiting for a buffered file to be truncated.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ControlFileRead','Waiting for a read from the pg_control file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ControlFileSync','Waiting for the pg_control file to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ControlFileSyncUpdate','Waiting for an update to the pg_control file to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ControlFileWrite','Waiting for a write to the pg_control file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ControlFileWriteUpdate','Waiting for a write to update the pg_control file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','CopyFileRead','Waiting for a read during a file copy operation.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','CopyFileWrite','Waiting for a write during a file copy operation.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','DataFileExtend','Waiting for a relation data file to be extended.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','DataFileFlush','Waiting for a relation data file to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','DataFileImmediateSync','Waiting for an immediate synchronization of a relation data file to durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','DataFilePrefetch','Waiting for an asynchronous prefetch from a relation data file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','DataFileRead','Waiting for a read from a relation data file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','DataFileSync','Waiting for changes to a relation data file to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','DataFileTruncate','Waiting for a relation data file to be truncated.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','DataFileWrite','Waiting for a write to a relation data file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','DsmAllocate','Waiting for a dynamic shared memory segment to be allocated.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','DsmFillZeroWrite','Waiting to fill a dynamic shared memory backing file with zeroes.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LockFileAddtodatadirRead','Waiting for a read while adding a line to the data directory lock file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LockFileAddtodatadirSync','Waiting for data to reach durable storage while adding a line to the data directory lock file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LockFileAddtodatadirWrite','Waiting for a write while adding a line to the data directory lock file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LockFileCreateRead','Waiting to read while creating the data directory lock file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LockFileCreateSync','Waiting for data to reach durable storage while creating the data directory lock file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LockFileCreateWrite','Waiting for a write while creating the data directory lock file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LockFileRecheckdatadirRead','Waiting for a read during recheck of the data directory lock file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LogicalRewriteCheckpointSync','Waiting for logical rewrite mappings to reach durable storage during a checkpoint.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LogicalRewriteMappingSync','Waiting for mapping data to reach durable storage during a logical rewrite.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LogicalRewriteMappingWrite','Waiting for a write of mapping data during a logical rewrite.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LogicalRewriteSync','Waiting for logical rewrite mappings to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LogicalRewriteTruncate','Waiting for truncate of mapping data during a logical rewrite.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','LogicalRewriteWrite','Waiting for a write of logical rewrite mappings.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','RelationMapRead','Waiting for a read of the relation map file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','RelationMapReplace','Waiting for durable replacement of a relation map file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','RelationMapWrite','Waiting for a write to the relation map file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ReorderBufferRead','Waiting for a read during reorder buffer management.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ReorderBufferWrite','Waiting for a write during reorder buffer management.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ReorderLogicalMappingRead','Waiting for a read of a logical mapping during reorder buffer management.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ReplicationSlotRead','Waiting for a read from a replication slot control file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ReplicationSlotRestoreSync','Waiting for a replication slot control file to reach durable storage while restoring it to memory.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ReplicationSlotSync','Waiting for a replication slot control file to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','ReplicationSlotWrite','Waiting for a write to a replication slot control file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','SlruFlushSync','Waiting for SLRU data to reach durable storage during a checkpoint or database shutdown.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','SlruRead','Waiting for a read of an SLRU page.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','SlruSync','Waiting for SLRU data to reach durable storage following a page write.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','SlruWrite','Waiting for a write of an SLRU page.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','SnapbuildRead','Waiting for a read of a serialized historical catalog snapshot.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','SnapbuildSync','Waiting for a serialized historical catalog snapshot to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','SnapbuildWrite','Waiting for a write of a serialized historical catalog snapshot.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','TimelineHistoryFileSync','Waiting for a timeline history file received via streaming replication to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','TimelineHistoryFileWrite','Waiting for a write of a timeline history file received via streaming replication.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','TimelineHistoryRead','Waiting for a read of a timeline history file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','TimelineHistorySync','Waiting for a newly created timeline history file to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','TimelineHistoryWrite','Waiting for a write of a newly created timeline history file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','TwophaseFileRead','Waiting for a read of a two phase state file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','TwophaseFileSync','Waiting for a two phase state file to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','TwophaseFileWrite','Waiting for a write of a two phase state file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','VersionFileSync','Waiting for the version file to reach durable storage while creating a database.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','VersionFileWrite','Waiting for the version file to be written while creating a database.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalsenderTimelineHistoryRead','Waiting for a read from a timeline history file during a walsender timeline command.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalBootstrapSync','Waiting for WAL to reach durable storage during bootstrapping.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalBootstrapWrite','Waiting for a write of a WAL page during bootstrapping.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalCopyRead','Waiting for a read when creating a new WAL segment by copying an existing one.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalCopySync','Waiting for a new WAL segment created by copying an existing one to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalCopyWrite','Waiting for a write when creating a new WAL segment by copying an existing one.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalInitSync','Waiting for a newly initialized WAL file to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalInitWrite','Waiting for a write while initializing a new WAL file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalRead','Waiting for a read from a WAL file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalSummaryRead','Waiting for a read from a WAL summary file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalSummaryWrite','Waiting for a write to a WAL summary file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalSync','Waiting for a WAL file to reach durable storage.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalSyncMethodAssign','Waiting for data to reach durable storage while assigning a new WAL sync method.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.'),
+  ('IO','WalWrite','Waiting for a write to a WAL file.','디스크 I/O 병목 가능성 → 디스크 성능 모니터링, WAL/데이터파일 관련 파라미터 튜닝, 스토리지 개선 검토.','디스크 I/O 지연. storage 성능 점검 필요. WAL 또는 데이터파일 쓰기 병목이 원인일 수 있음. autovacuum, checkpoint 설정 점검도 병행.')
+) AS temp_table(type, wait_name, description, response_strategy, detailed_strategy)
+WHERE LOWER(wait_name) LIKE '%$1%''''
+
+pf_lock_tree = '''with recursive l as (
+  select pid, locktype, granted,
+    array_position(array['accessshare','rowshare','rowexclusive','shareupdateexclusive','share','sharerowexclusive','exclusive','accessexclusive'], left(mode,-4)) m,
+    row(locktype,database,relation,page,tuple,virtualxid,transactionid,classid,objid,objsubid) obj from pg_locks
+), pairs as (
+  select w.pid waiter, l.pid locker, l.obj, l.m
+    from l w join l on l.obj is not distinct from w.obj and l.locktype=w.locktype and not l.pid=w.pid and l.granted
+   where not w.granted
+     and not exists ( select from l i where i.pid=l.pid and i.locktype=l.locktype and i.obj is not distinct from l.obj and i.m > l.m )
+), leads as (
+  select o.locker, 1::int lvl, count(*) q, array[locker] track, false as cycle from pairs o group by o.locker
+  union all
+  select i.locker, leads.lvl+1, (select count(*) from pairs q where q.locker=i.locker), leads.track||i.locker, i.locker=any(leads.track)
+    from pairs i, leads where i.waiter=leads.locker and not cycle
+), tree as (
+  select locker pid,locker dad,locker root,case when cycle then track end dl, null::record obj,0 lvl,locker::text path,array_agg(locker) over () all_pids from leads o
+   where (cycle and not exists (select from leads i where i.locker=any(o.track) and (i.lvl>o.lvl or i.q<o.q)))
+      or (not cycle and not exists (select from pairs where waiter=o.locker) and not exists (select from leads i where i.locker=o.locker and i.lvl<o.lvl))
+  union all
+  select w.waiter pid,tree.pid,tree.root,case when w.waiter=any(tree.dl) then tree.dl end,w.obj,tree.lvl+1,tree.path||'.'||w.waiter,all_pids || array_agg(w.waiter) over ()
+    from tree join pairs w on tree.pid=w.locker and not w.waiter = any ( all_pids )
+)
+select (clock_timestamp() - a.xact_start)::interval(0) as ts_age,
+       (clock_timestamp() - a.state_change)::interval(0) as change_age,
+       a.datname,a.usename,a.client_addr,
+       --w.obj wait_on_object,
+       tree.pid,replace(a.state, 'idle in transaction', 'idletx') state,
+       lvl,(select count(*) from tree p where p.path ~ ('^'||tree.path) and not p.path=tree.path) blocked,
+       case when tree.pid=any(tree.dl) then '!>' else repeat(' .', lvl) end||' '||trim(left(regexp_replace(a.query, e'\\s+', ' ', 'g'),100)) query
+  from tree
+  left join pairs w on w.waiter=tree.pid and w.locker=tree.dad
+  join pg_stat_activity a using (pid)
+  join pg_stat_activity r on r.pid=tree.root
+ order by (now() - r.xact_start), path'''
+pf_report = '''with pg_stat_statements_slice as (
+  select *
+  from pg_stat_statements
+  -- if current database is postgres then generate report for all databases,
+  -- otherwise generate for current database only
+  where
+    current_database() = 'postgres'
+    or dbid = (
+      select oid
+      from pg_database
+      where datname = current_database()
+    )
+), pg_stat_statements_normalized as (
+  select
+    *,
+    translate(
+      regexp_replace(
+        regexp_replace(
+          regexp_replace(
+            regexp_replace(
+              query,
+              e'\\?(::[a-zA-Z_]+)?( *, *\\?(::[a-zA-Z_]+)?)+', '?', 'g'
+            ),
+            e'\\$[0-9]+(::[a-zA-Z_]+)?( *, *\\$[0-9]+(::[a-zA-Z_]+)?)*', '$N', 'g'
+          ),
+          e'--.*$', '', 'ng'
+        ),
+        e'/\\*.*?\\*/', '', 'g'
+      ),
+      e'\r', ''
+    ) as query_normalized
+  from pg_stat_statements_slice
+), totals as (
+  select
+    sum(total_exec_time) as total_exec_time,
+    sum(blk_read_time+blk_write_time) as io_time,
+    sum(total_exec_time-blk_read_time-blk_write_time) as non_io_time,
+    sum(calls) as ncalls,
+    sum(rows) as total_rows
+  from pg_stat_statements_slice
+), _pg_stat_statements as (
+  select
+    (select datname from pg_database where oid = p.dbid) as database,
+    (select rolname from pg_roles where oid = p.userid) as username,
+    --select shortest query, replace \n\n-- strings to avoid email clients format text as footer
+    substring(
+      translate(
+        replace(
+          (array_agg(query order by length(query)))[1],
+          e'-- \n',
+          e'--\n'
+        ),
+        e'\r', ''
+      ),
+      1,
+      8192
+    ) as query,
+    sum(total_exec_time) as total_exec_time,
+    sum(blk_read_time) as blk_read_time, sum(blk_write_time) as blk_write_time,
+    sum(calls) as calls, sum(rows) as rows
+  from pg_stat_statements_normalized p
+  group by dbid, userid, md5(query_normalized)
+), totals_readable as (
+  select
+    to_char(interval '1 millisecond' * total_exec_time, 'HH24:MI:SS') as total_exec_time,
+    (100*io_time/total_exec_time)::numeric(20,2) as io_time_percent,
+    to_char(ncalls, 'FM999,999,999,990') as total_queries,
+    (select to_char(count(distinct md5(query)), 'FM999,999,990') from _pg_stat_statements) as unique_queries
+  from totals
+), statements as (
+  select
+    (100*total_exec_time/(select total_exec_time from totals)) as time_percent,
+    (100*(blk_read_time+blk_write_time)/(select greatest(io_time, 1) from totals)) as io_time_percent,
+    (100*(total_exec_time-blk_read_time-blk_write_time)/(select non_io_time from totals)) as non_io_time_percent,
+    to_char(interval '1 millisecond' * total_exec_time, 'HH24:MI:SS') as total_exec_time,
+    (total_exec_time::numeric/calls)::numeric(20,2) as avg_time,
+    ((total_exec_time-blk_read_time-blk_write_time)::numeric/calls)::numeric(20, 2) as avg_non_io_time,
+    ((blk_read_time+blk_write_time)::numeric/calls)::numeric(20, 2) as avg_io_time,
+    to_char(calls, 'FM999,999,999,990') as calls,
+    (100*calls/(select ncalls from totals))::numeric(20, 2) as calls_percent,
+    to_char(rows, 'FM999,999,999,990') as rows,
+    (100*rows/(select total_rows from totals))::numeric(20, 2) as row_percent,
+    database,
+    username,
+    query
+  from _pg_stat_statements
+  where
+    (total_exec_time-blk_read_time-blk_write_time)/(select non_io_time from totals) >= 0.01
+    or (blk_read_time+blk_write_time)/(
+      select greatest(io_time, 1) from totals
+    ) >= 0.01
+    or calls/(select ncalls from totals) >= 0.02
+    or rows/(select total_rows from totals) >= 0.02
+  union all
+  select
+    (100*sum(total_exec_time)::numeric/(select total_exec_time from totals)) as time_percent,
+    (100*sum(blk_read_time+blk_write_time)::numeric/(select greatest(io_time, 1) from totals)) as io_time_percent,
+    (100*sum(total_exec_time-blk_read_time-blk_write_time)::numeric/(select non_io_time from totals)) as non_io_time_percent,
+    to_char(interval '1 millisecond' * sum(total_exec_time), 'HH24:MI:SS') as total_exec_time,
+    (sum(total_exec_time)::numeric/sum(calls))::numeric(20,2) as avg_time,
+    (sum(total_exec_time-blk_read_time-blk_write_time)::numeric/sum(calls))::numeric(20, 2) as avg_non_io_time,
+    (sum(blk_read_time+blk_write_time)::numeric/sum(calls))::numeric(20, 2) as avg_io_time,
+    to_char(sum(calls), 'FM999,999,999,990') as calls,
+    (100*sum(calls)/(select ncalls from totals))::numeric(20, 2) as calls_percent,
+    to_char(sum(rows), 'FM999,999,999,990') as rows,
+    (100*sum(rows)/(select total_rows from totals))::numeric(20, 2) as row_percent,
+    'all' as database,
+    'all' as username,
+    'other' as query
+  from _pg_stat_statements
+  where
+    not (
+      (total_exec_time-blk_read_time-blk_write_time)/(select non_io_time from totals) >= 0.01
+      or (blk_read_time+blk_write_time)/(select greatest(io_time, 1) from totals) >= 0.01
+      or calls/(select ncalls from totals)>=0.02 or rows/(select total_rows from totals) >= 0.02
+    )
+), statements_readable as (
+  select row_number() over (order by s.time_percent desc) as pos,
+    to_char(time_percent, 'FM990.0') || '%' as time_percent,
+    to_char(io_time_percent, 'FM990.0') || '%' as io_time_percent,
+    to_char(non_io_time_percent, 'FM990.0') || '%' as non_io_time_percent,
+    to_char(avg_io_time*100/(coalesce(nullif(avg_time, 0), 1)), 'FM990.0') || '%' as avg_io_time_percent,
+    total_exec_time, avg_time, avg_non_io_time, avg_io_time, calls, calls_percent, rows, row_percent,
+    database, username, query
+  from statements s
+  where calls is not null
+)
+select
+  e'total time:\t' || total_exec_time || ' (IO: ' || io_time_percent || E'%)\n'
+  || e'total queries:\t' || total_queries || ' (unique: ' || unique_queries || E')\n'
+  || 'report for ' || (select case when current_database() = 'postgres' then 'all databases' else current_database() || ' database' end)
+  || E', version b0.9.6'
+  || ' @ PostgreSQL '
+  || (select setting from pg_settings where name='server_version') || E'\ntracking '
+  || (select setting from pg_settings where name='pg_stat_statements.track') || ' '
+  || (select setting from pg_settings where name='pg_stat_statements.max') || ' queries, utilities '
+  || (select setting from pg_settings where name='pg_stat_statements.track_utility')
+  || ', logging ' || (select (case when setting = '0' then 'all' when setting = '-1' then 'none' when setting::int > 1000 then (setting::numeric/1000)::numeric(20, 1) || 's+' else setting || 'ms+' end) from pg_settings where name='log_min_duration_statement')
+  || E' queries\n'
+  || (
+    select coalesce(string_agg('WARNING: database ' || datname || ' must be vacuumed within ' || to_char(2147483647 - age(datfrozenxid), 'FM999,999,999,990') || ' transactions', E'\n' order by age(datfrozenxid) desc) || E'\n', '')
+    from pg_database where (2147483647 - age(datfrozenxid)) < 200000000
+  ) || E'\n'
+from totals_readable
+union all
+(
+select
+  e'=============================================================================================================\n'
+  || 'pos:' || pos || E'\t total time: ' || total_exec_time || ' (' || time_percent
+  || ', IO: ' || io_time_percent || ', Non-IO: ' || non_io_time_percent || E')\t calls: '
+  || calls || ' (' || calls_percent || E'%)\t avg_time: ' || avg_time
+  || 'ms (IO: ' || avg_io_time_percent || E')\n' || 'user: '
+  || username || E'\t db: ' || database || E'\t rows: ' || rows
+  || ' (' || row_percent || '%)' || E'\t query:\n' || query || E'\n'
+from statements_readable
+order by pos
+)'''
+pf_parameter = '''select
+  name as "Parameter",
+  case when setting in ('-1', '0', 'off', 'on') then setting else
+    case unit
+      when '8kB' then pg_size_pretty(setting::int8 * 8 * 1024)
+      when '16MB' then pg_size_pretty(setting::int8 * 16 * 1024 * 1024)
+      when 'kB' then pg_size_pretty(setting::int8 * 1024)
+      else setting || coalesce ('', ' ' || unit)
+    end
+  end as "Value",
+  case when boot_val in ('-1', '0', 'off', 'on') then boot_val else
+    case unit
+      when '8kB' then pg_size_pretty(boot_val::int8 * 8 * 1024)
+      when '16MB' then pg_size_pretty(boot_val::int8 * 16 * 1024 * 1024)
+      when 'kB' then pg_size_pretty(boot_val::int8 * 1024)
+      else boot_val || coalesce ('', ' ' || unit)
+    end
+  end as "Default",
+  category as "Category"
+from pg_settings
+where
+  name in (
+    'max_connections',
+    'shared_buffers',
+    'effective_cache_size',
+    'maintenance_work_mem',
+    'work_mem',
+    'min_wal_size',
+    'max_wal_size',
+    'checkpoint_completion_target',
+    'wal_buffers',
+    'default_statistics_target',
+    'random_page_cost',
+    'effective_io_concurrency',
+    'max_worker_processes',
+    'max_parallel_workers_per_gather',
+    'max_parallel_workers',
+    'autovacuum_analyze_scale_factor',
+    'autovacuum_max_workers',
+    'autovacuum_vacuum_scale_factor',
+    'autovacuum_work_mem',
+    'autovacuum_naptime',
+    'random_page_cost',
+    'seq_page_cost'
+  )
+order by category, name'''
+pf_vaccum_activity = '''with data as (
+  select
+    p.pid as pid,
+    (select spcname from pg_tablespace where oid = reltablespace) as tblspace,
+    p.datname as database,
+    nspname as schema_name,
+    relname as table_name,
+    (now() - a.xact_start) as duration,
+    coalesce(wait_event_type ||'.'|| wait_event, null) as waiting,
+    case
+      when a.query ~* '^autovacuum.*to prevent wraparound' then 'wraparound'
+      when a.query ~* '^vacuum' then 'user'
+      else 'auto'
+    end as mode,
+    p.phase,
+    pg_size_pretty(pg_total_relation_size(relid)) as total_size,
+    pg_size_pretty(pg_total_relation_size(relid) - pg_indexes_size(relid)) as table_size,
+    pg_size_pretty(pg_indexes_size(relid)) as index_size,
+    pg_size_pretty(p.heap_blks_scanned * current_setting('block_size')::int) as scanned,
+    pg_size_pretty(p.heap_blks_vacuumed * current_setting('block_size')::int) as vacuumed,
+    round(100.0 * p.heap_blks_scanned / p.heap_blks_total, 2) as scanned_pct,
+    round(100.0 * p.heap_blks_vacuumed / p.heap_blks_total, 2) as vacuumed_pct,
+    p.index_vacuum_count,
+    round(100.0 * p.num_dead_tuples / p.max_dead_tuples, 2) as dead_pct,
+    p.num_dead_tuples,
+    p.max_dead_tuples
+  from pg_stat_progress_vacuum p
+  left join pg_stat_activity a using (pid)
+  left join pg_class c on c.oid = p.relid
+  left join pg_namespace n on n.oid = c.relnamespace
+)
+select
+  pid as "PID",
+  duration::interval(0)::text as "Duration",
+  mode as "Mode",
+  database || coalesce(
+    e'\n' || coalesce(nullif(schema_name, 'public') || '.', '') || table_name || coalesce(' [' || tblspace || ']', ''),
+    ''
+  ) as "DB & Table",
+  table_size as "Table",
+  index_size as "Indexes",
+  waiting as "Wait",
+  phase as "Phase",
+  scanned || ' (' || scanned_pct || '%)' || e' scanned\n'
+    || vacuumed || ' (' || vacuumed_pct || '%) vacuumed' as "Heap Vacuuming",
+  index_vacuum_count || ' completed cycles,'
+    || e'\n'
+    || case
+      when num_dead_tuples > 10^12 then round(num_dead_tuples::numeric / 10^12::numeric, 0)::text || 'T'
+      when num_dead_tuples > 10^9 then round(num_dead_tuples::numeric / 10^9::numeric, 0)::text || 'B'
+      when num_dead_tuples > 10^6 then round(num_dead_tuples::numeric / 10^6::numeric, 0)::text || 'M'
+      when num_dead_tuples > 10^3 then round(num_dead_tuples::numeric / 10^3::numeric, 0)::text || 'k'
+      else num_dead_tuples::text
+    end
+    || ' (' || dead_pct || e'%) dead tuples\nof max ~'
+    || case
+      when max_dead_tuples > 10^12 then round(max_dead_tuples::numeric / 10^12::numeric, 0)::text || 'T'
+      when max_dead_tuples > 10^9 then round(max_dead_tuples::numeric / 10^9::numeric, 0)::text || 'B'
+      when max_dead_tuples > 10^6 then round(max_dead_tuples::numeric / 10^6::numeric, 0)::text || 'M'
+      when max_dead_tuples > 10^3 then round(max_dead_tuples::numeric / 10^3::numeric, 0)::text || 'k'
+      else max_dead_tuples::text
+    end
+    || ' collected now' as "Index Vacuuming"
+from data
+order by duration desc'''
+pf_autovacuum_progress_queue = '''with table_opts as (
+  select
+    pg_class.oid,
+    relname,
+    nspname,
+    array_to_string(reloptions, '') as relopts
+  from pg_class
+  join pg_namespace ns on relnamespace = ns.oid
+), vacuum_settings as (
+  select
+    oid,
+    relname,
+    nspname,
+    case
+      when relopts like '%autovacuum_vacuum_threshold%' then regexp_replace(relopts, '.*autovacuum_vacuum_threshold=([0-9.]+).*', E'\\1')::int8
+      else current_setting('autovacuum_vacuum_threshold')::int8
+    end as autovacuum_vacuum_threshold,
+    case
+      when relopts like '%autovacuum_vacuum_scale_factor%' then regexp_replace(relopts, '.*autovacuum_vacuum_scale_factor=([0-9.]+).*', E'\\1')::numeric
+      else current_setting('autovacuum_vacuum_scale_factor')::numeric
+    end as autovacuum_vacuum_scale_factor,
+    case when relopts ~ 'autovacuum_enabled=(false|off)' then false else true end as autovacuum_enabled
+  from table_opts
+), p as (
+  select *
+  from pg_stat_progress_vacuum
+)
+select
+  --vacuum_settings.oid,
+  coalesce(
+    coalesce(nullif(vacuum_settings.nspname, 'public') || '.', '') || vacuum_settings.relname, -- current DB
+    format('[something in "%I"]', p.datname)
+  ) as table,
+  round((100 * psat.n_dead_tup::numeric / nullif(pg_class.reltuples, 0))::numeric, 2) as dead_tup_pct,
+  pg_class.reltuples::numeric,
+  psat.n_dead_tup,
+  'vt: ' || vacuum_settings.autovacuum_vacuum_threshold
+    || ', vsf: ' || vacuum_settings.autovacuum_vacuum_scale_factor
+    || case when not autovacuum_enabled then ', DISABLED' else ', enabled' end as "effective_settings",
+  case
+    when last_autovacuum > coalesce(last_vacuum, '0001-01-01') then left(last_autovacuum::text, 19) || ' (auto)'
+    when last_vacuum is not null then left(last_vacuum::text, 19) || ' (manual)'
+    else null
+  end as "last_vacuumed",
+  coalesce(p.phase, '~~~ in queue ~~~') as status,
+  p.pid as pid,
+  case
+    when a.query ~ '^autovacuum.*to prevent wraparound' then 'wraparound'
+    when a.query ~ '^vacuum' then 'user'
+    when a.pid is null then null
+    else 'regular'
+  end as mode,
+  case when a.pid is null then null else coalesce(wait_event_type ||'.'|| wait_event, 'f') end as waiting,
+  round(100.0 * p.heap_blks_scanned / nullif(p.heap_blks_total, 0), 1) AS scanned_pct,
+  round(100.0 * p.heap_blks_vacuumed / nullif(p.heap_blks_total, 0), 1) AS vacuumed_pct,
+  p.index_vacuum_count,
+  case
+    when psat.relid is not null and p.relid is not null then
+      (select count(*) from pg_index where indrelid = psat.relid)
+    else null
+  end as index_count
+from pg_stat_all_tables psat
+join pg_class on psat.relid = pg_class.oid
+join vacuum_settings on pg_class.oid = vacuum_settings.oid
+full outer join p on p.relid = psat.relid and p.datname = current_database()
+left join pg_stat_activity a using (pid)
+where
+  psat.relid is null
+  or autovacuum_vacuum_threshold + (autovacuum_vacuum_scale_factor::numeric * pg_class.reltuples) < psat.n_dead_tup'''
+fx_definition = '''SELECT
+  n.nspname AS schema,
+  p.proname AS name,
+  pg_get_functiondef(p.oid) AS definition
+FROM pg_proc p
+JOIN pg_namespace n ON p.pronamespace = n.oid
+WHERE p.prokind = 'p'
+  AND p.proname LIKE '%$1%''''
+aurora_plan_top10 = "SELECT planid, calls, mean_exec_time FROM aurora_stat_plans(true) WHERE planid != 0 AND plan_type = 'estimate' ORDER BY calls DESC LIMIT 10"
+aurora_plan_now = '''SELECT state, query_start, activity.query, explain_plan
+                      FROM aurora_stat_activity() activity
+                      JOIN aurora_stat_plans(true) plans ON (activity.plan_id = plans.planid) LIMIT '$1''''
+aurora_plan_id = "SELECT mean_exec_time, plan_type, pg_size_pretty(max_exec_peakmem) AS max_peak_memory, plan_captured_time, explain_plan, query FROM aurora_stat_plans(true) WHERE planid = '$1' ORDER BY mean_exec_time DESC"
+
+# Here's where you can provide a list of connection string aliases.
+# You can use it by passing the -D option. `pgcli -D example_dsn`
+[alias_dsn]
+# example_dsn = postgresql://[user[:password]@][netloc][:port][/dbname]
+
+# Format for number representation
+# for decimal "d" - 12345678, ",d" - 12,345,678
+# for float "g" - 123456.78, ",g" - 123,456.78
+[data_formats]
+decimal = ""
+float = ""
