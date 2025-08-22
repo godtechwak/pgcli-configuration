@@ -1569,6 +1569,7 @@ aurora_plan_now = '''SELECT state, query_start, activity.query, explain_plan
                       FROM aurora_stat_activity() activity
                       JOIN aurora_stat_plans(true) plans ON (activity.plan_id = plans.planid) LIMIT '$1''''
 aurora_plan_id = "SELECT mean_exec_time, plan_type, pg_size_pretty(max_exec_peakmem) AS max_peak_memory, plan_captured_time, explain_plan, query FROM aurora_stat_plans(true) WHERE planid = '$1' ORDER BY mean_exec_time DESC"
+ts = "SELECT n.nspname AS schemaname, c.relname AS tablename, to_char(c.reltuples,'FM999,999,999,999') AS row_count_estimate, to_char(COALESCE(s.n_dead_tup,0),'FM999,999,999,999') AS dead_tuple_count, pg_size_pretty(pg_indexes_size(c.oid)) AS index_size, pg_size_pretty(pg_total_relation_size(c.oid)) AS total_size FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace LEFT JOIN pg_stat_all_tables s ON s.relid=c.oid WHERE c.oid='$1'::regclass AND c.relkind IN('r','p')"
 
 # Here's where you can provide a list of connection string aliases.
 # You can use it by passing the -D option. `pgcli -D example_dsn`
